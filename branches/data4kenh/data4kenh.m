@@ -63,7 +63,7 @@ y_12k_1 = filter(b,a,y_nhan1);  %filtered signal
 y_12k_2 = filter(b,a,y_nhan2);  %filtered signal
 y_12k_3 = filter(b,a,y_nhan3);  %filtered signal
 y_12k_4 = filter(b,a,y_nhan4);  %filtered signal
-figure(2)
+figure(2);
 subplot(4,1,1);
 plot(y_12k_1);
 title('tin hieu 12k kenh 1');
@@ -87,7 +87,7 @@ title('tin hieu 12k kenh 4');
 % plot(psd(spectrum.periodogram,y_12k_4,'Fs',fs,'NFFT',length(y_12k_4)));
 
 data_4kenh_12k = [y_12k_1 y_12k_2 y_12k_3 y_12k_4];
-figure(4)
+figure(4);
 subplot(2,1,1);
 plot(data_4kenh_12k);
 
@@ -132,8 +132,8 @@ for index1=1:length(P1)
 %         disp('goc toi');
 %         disp(index/10-90);
     if (index1~= length(P1))&& (index1 ~= 1) && (P1(index1) > P1(index1-1)) && (P1(index1) > P1(index1+1))
-        disp('goc toi vi tri 1');
-        disp(index1/10-90);
+        %disp('goc toi vi tri 1');
+        %disp(index1/10-90);
     end
 end 
 
@@ -167,8 +167,8 @@ for index2=1:length(P2)
 %         disp('goc toi');
 %         disp(index/10-90);
     if (index2~= length(P2))&& (index2 ~= 1) && (P2(index2) > P2(index2-1)) && (P2(index2) > P2(index2+1))
-        disp('goc toi vi tri 2');
-        disp(index2/10-90);
+        %disp('goc toi vi tri 2');
+        %disp(index2/10-90);
     end
 end 
 %==============
@@ -201,8 +201,8 @@ for index3=1:length(P3)
 %         disp('goc toi');
 %         disp(index/10-90);
     if (index3~= length(P3))&& (index3 ~= 1) && (P3(index3) > P3(index3-1)) && (P3(index3) > P3(index3+1))
-        disp('goc toi vi tri 3');
-        disp(index3/10-90);
+        %disp('goc toi vi tri 3');
+        %disp(index3/10-90);
     end
 end 
 %==============
@@ -235,8 +235,8 @@ for index4=1:length(P4)
 %         disp('goc toi');
 %         disp(index/10-90);
     if (index4~= length(P4))&& (index4 ~= 1) && (P4(index4) > P4(index4-1)) && (P4(index4) > P4(index4+1))
-        disp('goc toi vi tri 4');
-        disp(index4/10-90);
+        %disp('goc toi vi tri 4');
+        %disp(index4/10-90);
     end
 end
 %=========

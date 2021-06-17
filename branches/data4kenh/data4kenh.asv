@@ -63,7 +63,7 @@ y_12k_1 = filter(b,a,y_nhan1);  %filtered signal
 y_12k_2 = filter(b,a,y_nhan2);  %filtered signal
 y_12k_3 = filter(b,a,y_nhan3);  %filtered signal
 y_12k_4 = filter(b,a,y_nhan4);  %filtered signal
-figure(2)
+figure(2);
 subplot(4,1,1);
 plot(y_12k_1);
 title('tin hieu 12k kenh 1');
@@ -87,7 +87,7 @@ title('tin hieu 12k kenh 4');
 % plot(psd(spectrum.periodogram,y_12k_4,'Fs',fs,'NFFT',length(y_12k_4)));
 
 data_4kenh_12k = [y_12k_1 y_12k_2 y_12k_3 y_12k_4];
-figure(4)
+figure(4);
 subplot(2,1,1);
 plot(data_4kenh_12k);
 
@@ -105,11 +105,11 @@ signals = 3;
 %==============
 %Goc tai vi tri 1
 %==============
-yy1 = hilbert(data_4kenh_12k(481800:493800,:));
-Nb1 = length(data_4kenh_12k(481800:493800,:)); %so mau
+yy1 = hilbert(data_4kenh_12k(1000:14400,:));
+Nb1 = length(data_4kenh_12k(1000:14400,:)); %so mau
 UU1 = yy1';
 dt = 1/fs;
-t = 0:dt:(length(data_4kenh_12k(481800:493800,:))*dt)-dt;
+t = 0:dt:(length(data_4kenh_12k(1000:14400,:))*dt)-dt;
 Ruu1=UU1*UU1'/Nb1;
 [eigVector1,eigValue1]=eig(Ruu1);
 eigValueMax1=max(max(eigValue1));
@@ -132,8 +132,8 @@ for index1=1:length(P1)
 %         disp('goc toi');
 %         disp(index/10-90);
     if (index1~= length(P1))&& (index1 ~= 1) && (P1(index1) > P1(index1-1)) && (P1(index1) > P1(index1+1))
-        disp('goc toi vi tri 1');
-        disp(index1/10-90);
+        %disp('goc toi vi tri 1');
+        %disp(index1/10-90);
     end
 end 
 
@@ -167,18 +167,18 @@ for index2=1:length(P2)
 %         disp('goc toi');
 %         disp(index/10-90);
     if (index2~= length(P2))&& (index2 ~= 1) && (P2(index2) > P2(index2-1)) && (P2(index2) > P2(index2+1))
-        disp('goc toi vi tri 2');
-        disp(index2/10-90);
+        %disp('goc toi vi tri 2');
+        %disp(index2/10-90);
     end
 end 
 %==============
-%Goc tai vi tri 2
+%Goc tai vi tri 3
 %==============
-yy2 = hilbert(data_4kenh_12k(23000:33500,:));
-Nb2 = length(data_4kenh_12k(23000:33500,:)); %so mau
-UU2 = yy2';
+yy3 = hilbert(data_4kenh_12k(481800:493800,:));
+Nb3 = length(data_4kenh_12k(481800:493800,:)); %so mau
+UU3 = yy3';
 %dt = 1/fs;
-t3 = 0:dt:(length(data_4kenh_12k(23000:33500,:))*dt)-dt;
+t3 = 0:dt:(length(data_4kenh_12k(481800:493800,:))*dt)-dt;
 Ruu3=UU3*UU3'/Nb3;
 [eigVector3,eigValue3]=eig(Ruu3);
 eigValueMax3=max(max(eigValue3));
@@ -201,11 +201,44 @@ for index3=1:length(P3)
 %         disp('goc toi');
 %         disp(index/10-90);
     if (index3~= length(P3))&& (index3 ~= 1) && (P3(index3) > P3(index3-1)) && (P3(index3) > P3(index3+1))
-        disp('goc toi vi tri 3');
-        disp(index3/10-90);
+        %disp('goc toi vi tri 3');
+        %disp(index3/10-90);
     end
 end 
+%==============
+%Goc tai vi tri 3
+%==============
+yy4 = hilbert(data_4kenh_12k(500000:513000,:));
+Nb4 = length(data_4kenh_12k(500000:513000,:)); %so mau
+UU4 = yy4';
+%dt = 1/fs;
+t4 = 0:dt:(length(data_4kenh_12k(500000:513000,:))*dt)-dt;
+Ruu4=UU4*UU4'/Nb4;
+[eigVector4,eigValue4]=eig(Ruu4);
+eigValueMax4=max(max(eigValue4));
+eigVectorNoise4=eigVector4(:,1:M-signals);
+i4=1; 
+for theta4=1:.1:180
+    i4=i4+1; 
+    A0_tmp4=10^(gain/10)*exp(j*k*(0:M-1)*d*(cos(theta4*pi/180))); 
+    A04=A0_tmp4.';
+    P4(i4)=10*log((A04'*A04)/(A04'*eigVectorNoise4*eigVectorNoise4'*A04))/10;
+    %P(i)=((A0'*A0)/(A0'*eigVectorNoise*eigVectorNoise'*A0))
+    %[maxP,index] = max(real(P));
+end
 
+for index4=1:length(P4)
+%     if (index == 1) && (P(1) > P(2))
+%         disp('goc toi vi tri 1');
+%         disp(index/10-90);
+%     elseif (index == length(P)) && (P(length(P)) > P(length(P)-1))
+%         disp('goc toi');
+%         disp(index/10-90);
+    if (index4~= length(P4))&& (index4 ~= 1) && (P4(index4) > P4(index4-1)) && (P4(index4) > P4(index4+1))
+        %disp('goc toi vi tri 4');
+        %disp(index4/10-90);
+    end
+end
 %=========
 %Plot pho khong gian DOA
 %=========
